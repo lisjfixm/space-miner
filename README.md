@@ -3,7 +3,8 @@
 - 引擎：Defold HTML5（WebAssembly + Emscripten）
 - 目前版本：**1.2**
 - 原始來源：<https://poki.com/zh/g/space-miner-eaa2fa6e#fullscreen>
-- 倉庫：私人 GitHub `lisjfixm/space-miner`，預設分支 `main`
+- 倉庫：GitHub `lisjfixm/space-miner`，預設分支 `main`
+- 線上版（GitHub Pages）：<https://lisjfixm.github.io/space-miner/>
 
 ## 啟動方式
 
@@ -22,6 +23,11 @@ py -m http.server 8778 --bind 127.0.0.1
 然後瀏覽器開啟 <http://127.0.0.1:8778/index.html>。
 
 注意：Defold HTML5 成品不可直接以 `file://` 雙擊開啟，必須經由 HTTP 伺服器載入；瀏覽器需支援 WebGL。
+
+### 線上部署（GitHub Pages）
+
+- Pages 由 `gh-pages` 分支根目錄部署，線上網址：<https://lisjfixm.github.io/space-miner/>。
+- `main` 為開發分支；更新成品後需把 `main` 內容同步到 `gh-pages`，線上版本才會跟著更新。
 
 ## 目錄結構
 
@@ -66,6 +72,7 @@ space-miner/
 - 錯誤面板（file:// 直開警告、無 WebGL）的外部連結改為純文字提示。
 - 停用主控台「Made with Defold」橫幅輸出。
 - 補本 README 與版本記錄。
+- 啟用 GitHub Pages 線上版（`gh-pages` 分支根目錄部署）。
 
 ### 1.1
 
