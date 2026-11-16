@@ -1,7 +1,7 @@
 # Space Miner C（離線版）
 
 - 引擎：Defold HTML5（WebAssembly + Emscripten）
-- 目前版本：**1.2**
+- 目前版本：**1.3**
 - 原始來源：<https://poki.com/zh/g/space-miner-eaa2fa6e#fullscreen>
 - 倉庫：GitHub `lisjfixm/space-miner`，預設分支 `main`
 - 線上版（GitHub Pages）：<https://lisjfixm.github.io/space-miner/>
@@ -37,6 +37,7 @@ space-miner/
 ├── dmloader.js             Defold 引擎載入器
 ├── SpaceMinerC_wasm.js     Emscripten 膠水層
 ├── SpaceMinerC.wasm        遊戲主體 WebAssembly
+├── overlay.js               外層疊層：實驗性自動遊玩開關與畫面辨識迴圈
 ├── 啟動 Space Miner.bat    Windows 本機伺服器啟動器（埠 8778）
 └── archive/
     ├── archive_files.json   打包資產清單
@@ -62,8 +63,17 @@ space-miner/
 
 - 必須使用支援 WebGL 的瀏覽器；無 GPU / 無 WebGL 的環境（例如部分雲端 headless 瀏覽器）會在 GL 初始化階段中斷。
 - 本目錄為 HTML5 發行成品，不含 Defold 原始工程；遊戲玩法、平衡與美術調整需回到原始工程處理。
+- 觸控：成品內建的虛擬方向鍵只在 SDK 回傳 mobile/tablet 類別時顯示；外層 stub 依觸控能力偵測回傳類別，未自製 DOM 搖桿。
+- 自動遊玩（`overlay.js`）為實驗性規則原型：只能透過 `readPixels` 讀取畫面像素，讀不到燃料、金幣等內部數值；黃色辨識門檻需在真機畫面下進一步調校。其合成按鍵對物理操控的驅動效果在無 WebGL / 自動化瀏覽器中未能完整驗證，預設關閉，不影響手動遊玩。
 
 ## 版本沿革
+
+### 1.3
+
+- 觸控裝置偵測：離線 stub 的 `getDeviceInfo` 依 `maxTouchPoints`、`pointer: coarse`、`ontouchstart` 判斷，觸控裝置回傳 `mobile` 以喚起成品內建虛擬方向鍵，桌面維持 `desktop`。
+- 外層包裝 `getContext` 強制 `preserveDrawingBuffer: true`，讓疊層可逐幀讀取 WebGL 畫面。
+- 新增 `overlay.js`：左上角「Auto」開關，規則式視覺自動遊玩雛形（分群偵測黃色鑽機與最近目標，合成方向鍵），預設關閉；關閉時釋放所有注入按鍵。
+- 版本號 1.2 → 1.3（頁面標題、`game0.projectc`、本 README）。
 
 ### 1.2
 
