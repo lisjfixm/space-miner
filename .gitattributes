@@ -1,0 +1,9 @@
+# Compiled Defold bundle must stay byte-exact: the loader checks the glue/wasm
+# sizes, so these files must never have their line endings converted on checkout.
+*.wasm binary
+*.js binary
+*.json binary
+*.arcd binary
+*.arci binary
+*.dmanifest binary
+*.projectc binary
